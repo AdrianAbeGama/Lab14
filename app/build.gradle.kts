@@ -18,6 +18,15 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildFeatures {
+            compose = true
+        }
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.5.0" // Asegúrate de que esta versión sea compatible
+        }
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
     }
 
     buildTypes {
@@ -29,9 +38,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -42,15 +58,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,4 +76,13 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Para soporte de AppWidgets
+    implementation(libs.androidx.glance.appwidget)
+
+    // Para APIs de interop con Material 3
+    implementation(libs.androidx.glance.material3)
+
+    // Para APIs de interop con Material 2
+    implementation(libs.androidx.glance.material)
 }
